@@ -4,12 +4,19 @@ class BlogsController < ApplicationController
   # GET /blogs
   # GET /blogs.json
   def index
+    @categories = Category.all
+    cate = params[:cate]
+    if !cate.nil?
+      @blogs = Blog.where(:category_id => cate)
+    else
     @blogs = Blog.all
+    end
   end
 
   # GET /blogs/1
   # GET /blogs/1.json
   def show
+    @blog =Blog.find(params[:id])
   end
 
   # GET /blogs/new
